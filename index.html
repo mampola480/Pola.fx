@@ -34,7 +34,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Vazirmatn', sans-serif;
-            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
@@ -45,7 +44,7 @@
             flex-direction: column;
         }
 
-        /* Splash Screen - سەوز و سپی */
+        /* Splash Screen - چارەسەرکراو بۆ ئەوەی نەمێنێت */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -59,7 +58,13 @@
             align-items: center;
             z-index: 9999;
             color: #ffffff;
-            animation: fadeOut 0.5s ease 2.2s forwards;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        #splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .splash-logo {
@@ -84,14 +89,6 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-            }
         }
 
         /* Header */
@@ -126,4 +123,212 @@
             background: none;
             border: 1px solid var(--border);
             color: var(--text-color);
-            padding
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Prices Grid */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+        }
+
+        .price-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-val {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Calculator Section */
+        .calc-box {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .calc-input {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            color: var(--text-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .calc-result {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Contact & Social Links */
+        .social-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Splash Screen (سەوز و سپی کە بە دڵنیاییەوە لارەبێت و ماڵپەڕەکە نیشان بدات) -->
+    <div id="splash-screen">
+        <div class="splash-logo">mam pola</div>
+        <p>خۆشحاڵین بە هاتنت...</p>
+        <div class="splash-loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo"><i class="fa-solid fa-chart-line"></i> mam pola</div>
+        <div class="header-controls">
+            <button class="btn-theme" onclick="toggleTheme()"><i class="fa-solid fa-adjust"></i> گۆڕینی ڕەنگ</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Market Section (mark landmask) -->
+        <div class="card">
+            <h2><i class="fa-solid fa-store"></i> بازارەکان (Mark Landmask) - نرخە ڕاستەوخۆکان</h2>
+            <div class="price-grid">
+                <div class="price-item">
+                    <span>دۆلار بەرامبەر دینار (100$)</span>
+                    <span class="price-val" id="usd-rate">151,250 IQD</span>
+                </div>
+                <div class="price-item">
+                    <span>يۆرۆ (EUR)</span>
+                    <span class="price-val">1.08 USD</span>
+                </div>
+                <div class="price-item">
+                    <span>پاوەند (GBP)</span>
+                    <span class="price-val">1.27 USD</span>
+                </div>
+                <div class="price-item">
+                    <span>USDT (Digital)</span>
+                    <span class="price-val">1,513 IQD</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Section -->
+        <div class="card">
+            <h2><i class="fa-solid fa-calculator"></i> ژمێرەری خێرای دۆلار بۆ دینار</h2>
+            <div class="calc-box">
+                <input type="number" id="usdInput" class="calc-input" placeholder="بڕی دۆلار ($) بنووسە..." oninput="calculateIQD()">
+                <div class="calc-result" id="iqdResult">بڕ بە دینار: 0 IQD</div>
+            </div>
+        </div>
+
+        <!-- Contact & Developer Section -->
+        <div class="card">
+            <h2><i class="fa-solid fa-address-book"></i> پەیوەندی کردن و سەکۆکان</h2>
+            <p style="margin-bottom: 10px; color: var(--text-muted);">ژمارەی مۆبایل بۆ پەیوەندی و تێلگرام: <strong>07514807205</strong></p>
+            <div class="social-links">
+                <a href="tel:07514807205" class="social-btn"><i class="fa-solid fa-phone"></i> پەیوەندی تەلەفۆنی</a>
+                <a href="https://t.me/07514807205" target="_blank" class="social-btn"><i class="fa-brands fa-telegram"></i> تێلیگرام</a>
+                <a href="https://wa.me/9647514807205" target="_blank" class="social-btn" style="background-color: #25d366;"><i class="fa-brands fa-whatsapp"></i> وۆتسئەپ</a>
+                <a href="https://tiktok.com/@mam_pola" target="_blank" class="social-btn" style="background-color: #000000;"><i class="fa-brands fa-tiktok"></i> تیکتۆک</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        دروستکراوە لەلایەن <span>mam pola</span> &copy; 2026 | هەموو مافەکان پارێزراون.
+    </footer>
+
+    <script>
+        // لادانی شاشەی چونە ژورەوە دوای چەند چرکەیەک بە شێوەی زامنکراو
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                if (splash) {
+                    splash.classList.add('hidden');
+                }
+            }, 2000);
+        });
+
+        // Toggle Theme Function
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+
+        // Simulating Live Price Update (Mark Landmask)
+        setInterval(() => {
+            const randomFluctuation
