@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mam pola | نیشانەی بازاڕ و دارایی</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Mam Pola — Forex Trading & Stock Exchange</title>
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0f172a;
@@ -14,147 +16,308 @@
             --text-muted: #94a3b8;
             --primary: #10b981;
             --primary-hover: #059669;
-            --accent: #ffffff;
+            --accent: #10b981;
             --border: #334155;
+            --green: #10b981;
+            --white: #ffffff;
         }
 
         .light-mode {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #0f172a;
             --text-muted: #64748b;
-            --primary: #059669;
-            --primary-hover: #047857;
-            --accent: #0f172a;
+            --primary: #10b981;
+            --primary-hover: #059669;
+            --accent: #10b981;
             --border: #e2e8f0;
+            --green: #10b981;
+            --white: #0f172a;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Vazirmatn', sans-serif;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            transition: background 0.3s, color 0.3s;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            line-height: 1.6;
         }
 
-        /* Header */
         header {
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--border);
-            padding: 15px 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
+            font-weight: 900;
+            color: var(--white);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .header-controls {
+        .logo span {
+            color: var(--green);
+        }
+
+        .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 2rem;
+            list-style: none;
             align-items: center;
         }
 
-        .btn-theme {
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
             background: none;
             border: 1px solid var(--border);
             color: var(--text-color);
-            padding: 8px 12px;
+            padding: 0.5rem 1rem;
             border-radius: 8px;
             cursor: pointer;
+            font-weight: 600;
+        }
+
+        .ticker-bar {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .ticker-content {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-weight: 600;
             font-size: 0.9rem;
         }
 
-        /* Main Container */
-        .container {
+        .ticker-item.up {
+            color: var(--green);
+        }
+
+        .ticker-item.white {
+            color: var(--white);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+
+        .main-container {
             max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-            flex: 1;
-            width: 100%;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        h2 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Prices Grid */
-        .price-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 15px;
-        }
-
-        .price-item {
-            background: var(--bg-color);
-            border: 1px solid var(--border);
-            padding: 15px;
             border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 2rem;
         }
 
-        .price-val {
+        .card h3 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .market-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .market-table th, .market-table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .market-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .market-table td {
+            color: var(--white);
             font-weight: 700;
-            color: var(--primary);
         }
 
-        /* Calculator Section */
-        .calc-box {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
+        .price-up {
+            color: var(--green) !important;
         }
 
-        .calc-input {
-            background: var(--bg-color);
+        .price-white {
+            color: var(--white) !important;
+        }
+
+        .contact-box {
+            background-color: var(--card-bg);
             border: 1px solid var(--border);
-            color: var(--text-color);
-            padding: 10px 15px;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .phone-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--green);
+            margin: 1.5rem 0;
+            direction: ltr;
+        }
+
+        .btn {
+            background-color: var(--green);
+            color: #fff;
+            padding: 0.8rem 2rem;
             border-radius: 8px;
-            font-size: 1rem;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .calc-result {
-            font-size: 1.1rem;
+            text-decoration: none;
             font-weight: 700;
-            color: var(--primary);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
         }
 
-        /* Contact & Social Links */
-        .social-links {
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-chart-line"></i> Mam <span>Pola</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">سەرەکی</a></li>
+                <li><a href="#">بازارەکان</a></li>
+                <li><a href="#">حاسبە</a></li>
+                <li><a href="#">پەیوەندی</a></li>
+            </ul>
+            <div class="actions">
+                <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ticker Bar -->
+    <div class="ticker-bar">
+        <div class="ticker-content">
+            <span class="ticker-item price-up">EUR/USD: 1.0892 (+0.45%)</span>
+            <span class="ticker-item price-white">GBP/USD: 1.2650 (0.00%)</span>
+            <span class="ticker-item price-up">XAU/USD (Gold): 2350.40 (+1.12%)</span>
+            <span class="ticker-item price-white">BTC/USD: 67400.00 (+2.30%)</span>
+            <span class="ticker-item price-up">NASDAQ: 18200.50 (+0.85%)</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <h2 class="section-title">نرخە ڕاستەوخۆکانی بازار (TradingView Style)</h2>
+        
+        <div class="grid-layout">
+            <!-- Market Table Card -->
+            <div class="card" style="grid-column: span 2;">
+                <h3>تابلۆی نرخی مارکێتە زیرەکەکان</h3>
+                <table class="market-table">
+                    <thead>
+                        <tr>
+                            <th>ئامراز / دراو</th>
+                            <th>نرخی ئێستا</th>
+                            <th>گۆڕانکاری</th>
+                            <th>دۆخ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EUR / USD</td>
+                            <td class="price-white">1.0892</td>
+                            <td class="price-up">+0.45%</td>
+                            <td class="price-up">کڕین / فرۆش</td>
+                        </tr>
+                        <tr>
+                            <td>GBP / USD</td>
+                            <td class="price-white">1.2650</td>
+                            <td class="price-white">0.00%</td>
+                            <td class="price-white">جێگیر</td>
+                        </tr>
+                        <tr>
+                            <td>XAU / USD (زێڕ)</td>
+                            <td class="price-white">2350.40</td>
+                            <td class="price-up">+1.12%</td>
+                            <td class="price-up">بەهێز</td>
+                        </tr>
+                        <tr>
+                            <td>BTC / USD (بیتکۆین)</td>
+                            <td class="price-white">67400.00</td>
+                            <td class="price
